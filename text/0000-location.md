@@ -14,7 +14,7 @@ implementations of Location for specialized industries or use cases may derive
 from or extend this implementation.
 
 This Grid Location proposal is specific to physical locations within a supply 
-chain. GS1 General Specifications defines a physical location as a site (an area,
+chain. The GS1 General Specification defines a physical location as a site (an area,
 a structure or group of structures) or an area within the site where something 
 was, is, or will be located. For example: A label attached to a loading dock or 
 to a shelf location in a warehouse. Legal entities, functions and digital 
@@ -68,8 +68,8 @@ are supported:
 - LocationUpdate - update (replace) the properties of a Location already in state.
 - LocationDelete - remove a Location from state.
  
-*Disclaimer: LocationDelete is a potentially hazardous operation and needs to 
-be done with care.
+_*Disclaimer: LocationDelete is a potentially hazardous operation and needs to 
+be done with care._
 
 
 ## Permissions
@@ -103,6 +103,7 @@ equation used to validate a GLN. It validates GLN format to avoid mistype errors
 similar to a credit card validation. It's implemented as an extensible function 
 such that further validation steps can be added, if needed. For details on the 
 equation see: [Check digit validation](https://www.gs1us.org/tools/check-digit-calculator "Check digit validation")
+
 
 
 # Reference-level explanation
@@ -320,7 +321,7 @@ digital locations and should be implemented with supplemental RFC(s).
 |GS1 Common Name|GS1 Attribute Name|Description|Example|Type|Min|Max|
 |---------------|------------------|-----------|-------|----|---|---|
 |Location Name 1|locationName|The name of the facility being described.|"Sunny Fresh Foods"|STRING|1|80|
-|Description|locationDescription|Free text,178 characters.|"A Cargill production facility dedicated to serving high-quality egg products across various markets."|STRING| | |
+|Description|locationDescription|Free text, 178 characters.|"A Cargill production facility dedicated to serving high-quality egg products across various markets."|STRING| | |
 |Location Type|locationType|Multiple types allowed. All Suppliers: Org Entity, Order From, Remit To, Ship To. Healthcare Providers: Bill To, Deliver To, Order By, Order From, Org Entity, Paid By, Recall, Remit To, Ship From, Ship To.|"Ship From"|ENUM|7|48|
 |Address Line 1|addressLine1|The primary street address for your location. The USPS address is validated if Country = United States.| "206 W 4th Street"|STRING|1|80|
 |City|city|Name of the city of your location. The USPS address is validated if Country = United States.|"Monticello"|STRING|1|35|
@@ -345,7 +346,7 @@ digital locations and should be implemented with supplemental RFC(s).
 |Industry Sector|industrySector|Select one option: General, CPG, Healthcare, Foodservice.|"Foodservice"|ENUM| | |
 |Supply Chain Role|role|Available options are based on the selected Industry Sector for this GLN. General: Manufacturer, Solutions Provider, Undefined. CPG: Manufacturer, Solutions Provider, Undefined. Healthcare: Distributor, Provider, Supplier, Undefined. Foodservice: 3rd Party, Warehouse, Distributor, Independent Operator, Manufacturer, Operator.|"Manufacturer"|ENUM| | |
 |Information Provider GLN|informationProviderGLN|The entity providing this information. Usually points to the primary business GLN listed in the spreadsheet or database.|GS1 US, Inc. "0614141000005"|NUM| | |
-|GDSN GLN Type|GDSNGLNType|Multiple types allowed. Options include: Brand Owner GLN, Manufacturer GLN, Recipient Provider GLN, Source Provider GLN, Information Provider GLN|"Brand Owner GLN|ENUM|15|34|
+|GDSN GLN Type|GDSNGLNType|Multiple types allowed. Options include: Brand Owner GLN, Manufacturer GLN, Recipient Provider GLN, Source Provider GLN, Information Provider GLN.|"Brand Owner GLN"|ENUM|15|34|
 |Replaced GLN|replaced GLN|The GLN assigned to this location previously, if any.|"1234567890128"|NUM|13|13|
 
 
