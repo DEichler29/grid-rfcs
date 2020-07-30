@@ -157,7 +157,7 @@ Location Reference number follows which is 2-5 digits in length and is
 allocated by the company to a location or party. Lastly, a single digit Check 
 Digit is calculated and applied according to a GS1 algorithm.
 
-... figure out how to insert image in Markdown format
+![GLN Data Format](https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSFo3J5QULgkCWyIH3yeddRPx1H5aQusLRRq47y1n2FqTshGxs%3Ax-raw-image%3A%2F%2F%2Ff4fc819afc288cee1948ca0d40d76c3bcd56a6d270fcfeeac80fd25784eb6071&usqp=CAU)
 
 After the 10-hex-characters that are consumed by the grid namespace prefix, the 
 location, and GS1 prefixes, there are 60 hex characters remaining in the address.
@@ -316,8 +316,37 @@ This Location RFC defines required and optional attributes for GS1 Locations
 industries, financial/tax account information, a physical location extension, or
 digital locations and should be implemented with supplemental RFC(s).
 
-... going to add in table in separate commit
+**_REQUIRED FIELDS_**
+|GS1 Common Name|GS1 Attribute Name|Description|Example|Type|Min|Max|
+|---------------|------------------|-----------|-------|----|---|---|
+|Location Name 1|locationName|The name of the facility being described.|"Sunny Fresh Foods"|STRING|1|80|
+|Description|locationDescription|Free text,178 characters.|"A Cargill production facility dedicated to serving high-quality egg products across various markets."|STRING| | |
+|Location Type|locationType|Multiple types allowed. All Suppliers: Org Entity, Order From, Remit To, Ship To. Healthcare Providers: Bill To, Deliver To, Order By, Order From, Org Entity, Paid By, Recall, Remit To, Ship From, Ship To.|"Ship From"|ENUM|7|48|
+|Address Line 1|addressLine1|The primary street address for your location. The USPS address is validated if Country = United States.| "206 W 4th Street"|STRING|1|80|
+|City|city|Name of the city of your location. The USPS address is validated if Country = United States.|"Monticello"|STRING|1|35|
+|State or Region|stateOrRegion|The state, province, or region using the standard two-letter abbreviation specified in ISO 3166-2:1998 country subdivision code [16].|"MN"|STRING|1|3|
+|Postal Code|postalCode|The ZIP or other postal code.|"55362-8524"|STRING|1|10|
+|Country|country|Country of your location. Spell out, do not use abbreviations.|"United States"|STRING|2|80|
+|Latitude|latitude|(for fields)|"44.986656"|LAT| | |
+|Longitude|longitude|(for fields)|"-93.258133"|LONG| | |
+|Contact Name|contactName| |"Jane Doe"|STRING| | |
+|Contact Email|contactEmail| |"jane_doe@example.com"|STRING| | |
+|Contact Phone|contactPhone|The location's primary phone number. Best practice is individual with assignment duty.|"937-435-3870"|STRING|1|30|
+|Create Date|createDate|Date this location becomes active.|"06/01/2015"| | | |
 
+**_OPTIONAL FIELDS_**
+|GS1 Common Name|GS1 Attribute Name|Description|Example|Type|Min|Max|
+|---------------|------------------|-----------|-------|----|---|---|
+|Location Name 2|locationName2|A secondary facility name.|"Cargill Incorporated"|STRING|0|80|
+|Address Line 2|addressLine2|Any secondary information such as Suite, Floor, etc. The USPS address is validated if Country = United States.|"Suite 204"|STRING|0|80|
+|Address Line 3|addressLine3|Additional descriptive information that is not verified through the USPS data base. Best practice is to use AddressLine3 when there are multiple locations using the same USPS address. Examples: Billing office, cardiology lab, backroom, etc.| | | | |
+|Inactivation Date|inactivationDate|Date this location is no longer used by the information provider.|"01/15/2020"| | | |
+|Parent Location GLN|parentLocation|Used to describe a location hierarchy. Needed for every GLN except the top-level location, which does not have a parent location.|"0653114000000"|NUM|13|13|
+|Industry Sector|industrySector|Select one option: General, CPG, Healthcare, Foodservice.|"Foodservice"|ENUM| | |
+|Supply Chain Role|role|Available options are based on the selected Industry Sector for this GLN. General: Manufacturer, Solutions Provider, Undefined. CPG: Manufacturer, Solutions Provider, Undefined. Healthcare: Distributor, Provider, Supplier, Undefined. Foodservice: 3rd Party, Warehouse, Distributor, Independent Operator, Manufacturer, Operator.|"Manufacturer"|ENUM| | |
+|Information Provider GLN|informationProviderGLN|The entity providing this information. Usually points to the primary business GLN listed in the spreadsheet or database.|GS1 US, Inc. "0614141000005"|NUM| | |
+|GDSN GLN Type|GDSNGLNType|Multiple types allowed. Options include: Brand Owner GLN, Manufacturer GLN, Recipient Provider GLN, Source Provider GLN, Information Provider GLN|"Brand Owner GLN|ENUM|15|34|
+|Replaced GLN|replaced GLN|The GLN assigned to this location previously, if any.|"1234567890128"|NUM|13|13|
 
 
 # Drawbacks
